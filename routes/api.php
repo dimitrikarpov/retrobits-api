@@ -17,4 +17,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('bits', 'v1\BitController');
+Route::apiResource('bits', 'v1\BitController');
+//Route::post('books/{book}/rating', 'RatingController@store');
