@@ -15,15 +15,18 @@ class CreateBitsTable extends Migration
     {
         Schema::create('bits', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('game_title');
-            $table->string('game_rom')->nullable();
-            $table->string('game_image')->nullable();
+            $table->unsignedInteger('game_id');
+
             $table->string('title');
             $table->integer('players')->default(1);
             $table->string('difficult')->nullable();
             $table->integer('rating')->nullable();
             $table->string('savefile')->nullable();
             $table->timestamps();
+
+            $table->foreign('game_id')
+                ->references('id')->on('games')
+                ->onDelete('cascade');
         });
     }
 
