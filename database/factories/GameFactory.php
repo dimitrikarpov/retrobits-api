@@ -8,6 +8,9 @@ $titles = [
 
 $factory->define(App\Game::class, function (Faker $faker) use ($titles) {
     return [
+        'platform_id' => function () {
+            return App\Platform::all()->random()->id;
+        },
         'title' => $faker->unique()->randomElement($titles),
         'description' => $faker->paragraph(),
         'rom' => null,

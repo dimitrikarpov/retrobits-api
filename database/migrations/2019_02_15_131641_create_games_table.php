@@ -15,11 +15,16 @@ class CreateGamesTable extends Migration
     {
         Schema::create('games', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('platform_id');
             $table->string('title');
             $table->text('description')->nullable();
             $table->string('rom')->nullable();
             $table->string('image')->nullable();
             $table->timestamps();
+
+            $table->foreign('platform_id')
+                ->references('id')->on('platforms')
+                ->onDelete('cascade');
         });
     }
 
