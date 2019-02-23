@@ -16,8 +16,8 @@ class CreateBitsTable extends Migration
         Schema::create('bits', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('game_id');
-
             $table->string('title');
+            $table->text('description')->nullable();
             $table->integer('players')->default(1);
             $table->string('difficult')->nullable();
             $table->integer('rating')->nullable();
