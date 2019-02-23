@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class BitsTableSeeder extends Seeder
+class BitsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,7 @@ class BitsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Bit::class, 50)->create();
+        factory(App\Game::class, 100)->create();
+        factory(App\Bit::class, 1000)->create();
     }
 }
