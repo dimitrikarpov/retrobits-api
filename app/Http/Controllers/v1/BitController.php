@@ -16,7 +16,7 @@ class BitController extends Controller
      */
     public function index()
     {
-        return BitResource::collection(Bit::paginate(10));
+        return BitResource::collection(Bit::filter(request()->input('filter'))->paginate(10));
     }
 
     /**
