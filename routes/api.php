@@ -18,4 +18,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('bits', 'v1\BitController');
-//Route::post('books/{book}/rating', 'RatingController@store');
+Route::apiResource('games', 'v1\GameController');
