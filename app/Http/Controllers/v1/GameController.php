@@ -16,7 +16,7 @@ class GameController extends Controller
      */
     public function index()
     {
-        return GameResource::collection(Game::all());
+        return GameResource::collection(Game::filter(request()->input('filter'))->get());
     }
 
     /**

@@ -17,4 +17,15 @@ class Game extends Model
     {
         return $this->hasMany(Bit::class);
     }
+
+    public static function filter($filters)
+    {
+        $query = self::query();
+
+        if (isset($filters['platform']) && $filters['platform']) {
+            $query = $query->where('platform_id', $filters['platform']);
+        }
+
+        return $query;
+    }
 }
