@@ -6,7 +6,7 @@ $factory->define(App\Platform::class, function (Faker $faker) {
     $name = $faker->word;
 
     return [
-        'name' => $name,
+        'title' => $name,
         'slug' => $name
     ];
 });

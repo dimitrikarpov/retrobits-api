@@ -20,11 +20,7 @@ class GameResource extends JsonResource
             'description' => $this->description,
             'rom' => $this->rom,
             'image' => $this->image,
-            'platform' => [
-                'id' => $this->platform->id,
-                'name' => $this->platform->name,
-                'slug' => $this->platform->slug,
-            ]
+            'platform' => new PlatformResource($this->platform),
         ];
     }
 }
