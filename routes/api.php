@@ -20,3 +20,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::apiResource('bits', 'v1\BitController');
 Route::apiResource('games', 'v1\GameController');
 Route::apiResource('platforms', 'v1\PlatformController');
+
+Route::post('login', 'v1\Login');
