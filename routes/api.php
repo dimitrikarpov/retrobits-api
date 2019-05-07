@@ -21,5 +21,6 @@ Route::apiResource('bits', 'v1\BitController');
 Route::apiResource('games', 'v1\GameController');
 Route::apiResource('platforms', 'v1\PlatformController');
 
+Route::post('register', 'v1\Register');
 Route::post('login', 'v1\Login');
 Route::post('logout', 'v1\Logout')->middleware('auth:api');
