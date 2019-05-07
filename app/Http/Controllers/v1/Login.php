@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\v1;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\v1\LoginRequest;
 use App\Http\Controllers\Controller;
 
 class Login extends Controller
@@ -13,7 +13,7 @@ class Login extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(Request $request)
+    public function __invoke(LoginRequest $request)
     {
         if (auth()->attempt(['email' => request('email'), 'password' => request('password')])) {
             $user = auth()->user();
