@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\v1;
 
+use App\Actions\v1\FetchBits;
 use App\Bit;
 use App\Http\Requests\v1\BitStoreRequest;
 use App\Http\Resources\BitResource;
+use App\Http\Transfers\v1\BitIndexData;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -13,11 +15,14 @@ class BitController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param FetchBits $action
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function index()
+    public function index(FetchBits $action)
     {
-        return BitResource::collection(Bit::filter(request()->input('filter'))->paginate(10));
+        $data = BitIndexData::fromRequest(request());
+
+        return BitResource::collection($action->handle($data)->paginate(10));
     }
 
     /**
