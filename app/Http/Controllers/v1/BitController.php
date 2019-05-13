@@ -7,7 +7,7 @@ use App\Bit;
 use App\Http\Requests\v1\BitIndexRequest;
 use App\Http\Requests\v1\BitStoreRequest;
 use App\Http\Resources\BitResource;
-use App\Http\Transfers\v1\BitIndexData;
+use App\Transfers\v1\BitIndexData;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 

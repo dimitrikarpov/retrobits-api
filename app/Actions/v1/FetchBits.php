@@ -3,7 +3,7 @@
 namespace App\Actions\v1;
 
 use App\Bit;
-use App\Http\Transfers\v1\BitIndexData;
+use App\Transfers\v1\BitIndexData;
 use Illuminate\Database\Eloquent\Builder;
 
 class FetchBits
