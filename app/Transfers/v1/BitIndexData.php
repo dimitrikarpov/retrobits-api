@@ -32,7 +32,7 @@ class BitIndexData
         $difficult = [];
         $players = [];
         $rating = [];
-        $sort = null;
+        $sort = '';
 
         if ($filters = $request->input('filter')) {
             if (isset($filters['difficult']) && $filters['difficult']) {
@@ -48,7 +48,7 @@ class BitIndexData
             }
         }
 
-        $sort = $request->input('sort') ?? null;
+        $sort = $request->input('sort') ?? '';
 
         return new self($difficult, $players, $rating, $sort);
     }
