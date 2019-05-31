@@ -8,6 +8,8 @@ class Game extends Model
 {
     protected $guarded = [];
 
+    protected $with = ['platform'];
+
     public function platform()
     {
         return $this->belongsTo(Platform::class);

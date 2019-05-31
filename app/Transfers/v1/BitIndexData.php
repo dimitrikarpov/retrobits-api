@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 class BitIndexData
 {
+    public $platform;
     public $difficult;
     public $players;
     public $rating;
@@ -19,6 +20,7 @@ class BitIndexData
      *
      * In to this:
      * BitIndexData {
+     *   platform: ["nes", "snes"]
      *   difficult: [ "normal", "hard"]
      *   players: ["1", "2"]
      *   rating: []
@@ -29,12 +31,17 @@ class BitIndexData
      */
     public static function fromRequest(Request $request): BitIndexData
     {
+        $platform = [];
         $difficult = [];
         $players = [];
         $rating = [];
         $sort = '';
 
         if ($filters = $request->input('filter')) {
+            if (isset($filters['platform']) && $filters['platform']) {
+                $platform = explode(',', $filters['platform']);
+            }
+
             if (isset($filters['difficult']) && $filters['difficult']) {
                 $difficult = explode(',', $filters['difficult']);
             }
@@ -50,22 +57,25 @@ class BitIndexData
 
         $sort = $request->input('sort') ?? '';
 
-        return new self($difficult, $players, $rating, $sort);
+        return new self($platform, $difficult, $players, $rating, $sort);
     }
 
     /**
      * BitIndexData constructor.
+     * @param array $platform
      * @param array $difficult
      * @param array $players
      * @param array $rating
      * @param string $sort
      */
     public function __construct(
+        array $platform,
         array $difficult,
         array $players,
         array $rating,
         string $sort
     ) {
+        $this->platform = $platform;
         $this->difficult = $difficult;
         $this->players = $players;
         $this->rating = $rating;
