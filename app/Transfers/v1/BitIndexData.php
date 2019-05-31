@@ -55,7 +55,7 @@ class BitIndexData
             }
         }
 
-        $sort = $request->input('sort') ?? '';
+        $sort = $request->input('sort', '');
 
         return new self($platform, $difficult, $players, $rating, $sort);
     }

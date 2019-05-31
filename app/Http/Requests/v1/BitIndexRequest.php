@@ -30,6 +30,7 @@ class BitIndexRequest extends FormRequest
             'filter.players' =>  ['sometimes', 'required', new ParamsInArray(['1', '2'])],
             'filter.rating' =>  ['sometimes', 'required', new ParamsInArray(['1', '2', '3', '4', '5'])],
             'filter.platform' => ['sometimes', 'required', new ParamsInArray(Platform::pluck('slug')->toArray())],
+            'sort' => 'sometimes|required|in:latest,rating',
         ];
     }
 }

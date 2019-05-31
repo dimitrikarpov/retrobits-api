@@ -31,7 +31,11 @@ class FetchBits
         }
 
         if ($data->sort) {
-            // sorting logic
+            if ('latest' === $data->sort) {
+                $query = $query->orderBy('created_at', 'DESC');
+            } else if ('rating' === $data->sort) {
+                $query = $query->orderBy('rating', 'DESC');
+            }
         }
 
         return $query;

@@ -13,7 +13,7 @@ class PlatformsSeeder extends Seeder
     {
         factory(App\Platform::class)->create([
             'title' => 'ZX-Spectrum',
-            'slug' => 'zx-spectrum'
+            'slug' => 'spectrum'
         ]);
 
         factory(App\Platform::class)->create([
