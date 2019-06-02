@@ -24,11 +24,7 @@ class BitResource extends JsonResource
             'savefile' => $this->savefile,
             'created_at' => (string) $this->created_at,
             'updated_at' => (string) $this->updated_at,
-            'game' => [
-                'id' => $this->game->id,
-                'title' => $this->game->title,
-                'image' => $this->game->image,
-            ]
+            'game' => new GameResource($this->game),
         ];
     }
 }
