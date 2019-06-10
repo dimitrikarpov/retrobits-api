@@ -5,10 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Actions\Admin\FetchGames;
 use App\Game;
 use App\Http\Requests\Admin\GameIndexRequest;
+use App\Http\Requests\Admin\GameStoreRequest;
 use App\Http\Resources\Admin\GameResource;
 use App\Transfers\Admin\GameIndexData;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class GameController extends Controller
 {
@@ -25,19 +26,17 @@ class GameController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
+     * @param GameStoreRequest $request
      * @return GameResource
      */
-    public function store(Request $request)
+    public function store(GameStoreRequest $request)
     {
         $game = Game::create([
-            'platform_id' => $request->platform_id,
+            'platform_id' => $request->platform,
             'title' => $request->title,
             'description' => $request->description,
-            'rom' => $request->rom,
-            'image' => $request->image,
+            'rom' => $request->rom->store('images'),
+            'image' => $request->image->store('savefiles'),
         ]);
 
         return new GameResource($game);
