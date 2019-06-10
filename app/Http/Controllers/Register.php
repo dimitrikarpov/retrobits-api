@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\v1;
+namespace App\Http\Controllers;
 
-use App\Http\Requests\v1\RegisterRequest;
+use App\Http\Requests\RegisterRequest;
 use App\User;
-use App\Http\Controllers\Controller;
 
 class Register extends Controller
 {

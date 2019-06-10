@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\v1;
+namespace App\Http\Requests\App;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class LoginRequest extends FormRequest
+class BitStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,11 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|exists:users,email',
-            'password' => 'required|min:6',
+            'game' => 'required|exists:games,id',
+            'title' => 'required',
+            'description' => 'required',
+            'players' => 'required',
+            'savefile' => 'required|file',
         ];
     }
 }

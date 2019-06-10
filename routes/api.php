@@ -17,10 +17,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('bits', 'v1\BitController');
-Route::apiResource('games', 'v1\GameController');
-Route::apiResource('platforms', 'v1\PlatformController');
+Route::prefix('app')->namespace('App')->group(function() {
+    Route::apiResource('bits', 'BitController');
+});
 
-Route::post('register', 'v1\Register');
-Route::post('login', 'v1\Login');
-Route::post('logout', 'v1\Logout')->middleware('auth:api');
+Route::prefix('admin')->namespace('Admin')->group(function() {
+    Route::apiResource('games', 'GameController');
+    Route::apiResource('platforms', 'PlatformController');
+});
+
+Route::post('register', 'Register');
+Route::post('login', 'Login');
+Route::post('logout', 'Logout')->middleware('auth:api');

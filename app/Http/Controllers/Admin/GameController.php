@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\v1;
+namespace App\Http\Controllers\Admin;
 
 use App\Game;
 use App\Http\Resources\GameResource;

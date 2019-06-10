@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Transfers\v1;
+namespace App\Transfers\App;
 
 use Illuminate\Http\Request;
 

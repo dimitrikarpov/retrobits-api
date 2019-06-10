@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Requests\v1;
+namespace App\Http\Requests\App;
 
 use App\Platform;
-use App\Rules\v1\ParamsInArray;
+use App\Rules\ParamsInArray;
 use Illuminate\Foundation\Http\FormRequest;
 
 class BitIndexRequest extends FormRequest

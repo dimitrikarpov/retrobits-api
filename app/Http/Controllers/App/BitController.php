@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\v1;
+namespace App\Http\Controllers\App;
 
-use App\Actions\v1\FetchBits;
+use App\Actions\App\FetchBits;
 use App\Bit;
-use App\Http\Requests\v1\BitIndexRequest;
-use App\Http\Requests\v1\BitStoreRequest;
-use App\Http\Resources\BitResource;
-use App\Transfers\v1\BitIndexData;
+use App\Http\Requests\App\BitIndexRequest;
+use App\Http\Requests\App\BitStoreRequest;
+use App\Http\Resources\App\BitResource;
+use App\Transfers\App\BitIndexData;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 

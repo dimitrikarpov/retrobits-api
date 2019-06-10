@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\v1;
+namespace App\Http\Controllers;
 
-use App\Http\Requests\v1\LoginRequest;
-use App\Http\Controllers\Controller;
+use App\Http\Requests\LoginRequest;
 
 class Login extends Controller
 {

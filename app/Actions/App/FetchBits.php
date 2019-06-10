@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Actions\v1;
+namespace App\Actions\App;
 
 use App\Bit;
-use App\Transfers\v1\BitIndexData;
+use App\Transfers\App\BitIndexData;
 use Illuminate\Database\Eloquent\Builder;
 
 class FetchBits

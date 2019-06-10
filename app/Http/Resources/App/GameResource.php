@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\App;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class PlatformResource extends JsonResource
+class GameResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,7 +17,10 @@ class PlatformResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'slug' => $this->slug,
+            'description' => $this->description,
+            'rom' => $this->rom,
+            'image' => $this->image,
+            'platform' => new PlatformResource($this->platform),
         ];
     }
 }

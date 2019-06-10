@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\v1;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Resources\PlatformResource;
 use App\Platform;
