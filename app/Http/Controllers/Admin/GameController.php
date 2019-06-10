@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Game;
-use App\Http\Resources\GameResource;
+use App\Http\Resources\Admin\GameResource;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
