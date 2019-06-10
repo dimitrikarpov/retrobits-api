@@ -16,7 +16,7 @@ class BitIndexData
      * Transform request with params to the data transfer object
      *
      * For example, transform this:
-     * /api/bits?filter[difficult]=normal,hard&filter[players]=1,2&sort=recent
+     * /api/app/bits?filter[difficult]=normal,hard&filter[players]=1,2&sort=recent
      *
      * In to this:
      * BitIndexData {

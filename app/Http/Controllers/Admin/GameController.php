@@ -2,21 +2,26 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Actions\Admin\FetchGames;
 use App\Game;
+use App\Http\Requests\Admin\GameIndexRequest;
 use App\Http\Resources\Admin\GameResource;
+use App\Transfers\Admin\GameIndexData;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class GameController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
+     * @param GameIndexRequest $request
+     * @param FetchGames $action
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function index()
+    public function index(GameIndexRequest $request, FetchGames $action)
     {
-        return GameResource::collection(Game::filter(request()->input('filter'))->get());
+        $data = GameIndexData::fromRequest($request);
+
+        return GameResource::collection($action->handle($data)->paginate(10));
     }
 
     /**
