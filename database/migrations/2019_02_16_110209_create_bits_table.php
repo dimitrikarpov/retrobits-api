@@ -22,10 +22,15 @@ class CreateBitsTable extends Migration
             $table->string('difficult')->nullable();
             $table->integer('rating')->nullable();
             $table->string('savefile')->nullable();
+            $table->unsignedInteger('user_id');
             $table->timestamps();
 
             $table->foreign('game_id')
                 ->references('id')->on('games')
+                ->onDelete('cascade');
+
+            $table->foreign('user_id')
+                ->references('id')->on('users')
                 ->onDelete('cascade');
         });
     }

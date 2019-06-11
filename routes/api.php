@@ -24,6 +24,7 @@ Route::prefix('app')->namespace('App')->group(function() {
 Route::prefix('admin')->namespace('Admin')->group(function() {
     Route::apiResource('games', 'GameController');
     Route::apiResource('platforms', 'PlatformController')->only('index');
+    Route::apiResource('users', 'UserController');
 });
 
 Route::post('register', 'Register');

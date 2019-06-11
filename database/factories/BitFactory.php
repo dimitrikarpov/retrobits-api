@@ -13,6 +13,9 @@ $factory->define(App\Bit::class, function (Faker $faker) {
         'difficult' => $faker->randomElement(['easy', 'normal', 'hard']),
         'rating' => $faker->numberBetween(1, 5),
         'savefile' => null,
+        'user_id' => function() {
+            return App\User::all()->random()->id;
+        },
     ];
 });
 
