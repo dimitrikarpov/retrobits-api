@@ -26,6 +26,10 @@ class FetchGames
             }
         }
 
+        if ($data->title_search) {
+            $query = $query->where('title', 'like', "%{$data->title_search}%");
+        }
+
         return $query;
     }
 }

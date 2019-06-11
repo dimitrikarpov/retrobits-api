@@ -9,6 +9,7 @@ class GameIndexData
     public $platform;
     public $sort;
     public $page_size;
+    public $title_search;
 
     /**
      * Transform request with params to the data transfer object
@@ -20,7 +21,8 @@ class GameIndexData
      * GameIndexData {
      *   platform: ['nes']
      *   sort: '-title'
-     *   page_size: 10}
+     *   page_size: 10
+     *   title_search: 'castlevania' }
      *
      * @param Request $request
      * @return GameIndexData
@@ -30,10 +32,15 @@ class GameIndexData
         $platform = [];
         $sort = '';
         $page_size = 0;
+        $title_search = '';
 
         if ($filters = $request->input('filter')) {
             if (isset($filters['platform']) && $filters['platform']) {
                 $platform = explode(',', $filters['platform']);
+            }
+
+            if (isset($filters['title']) && $filters['title']) {
+                $title_search = $filters['title'];
             }
         }
 
@@ -41,7 +48,7 @@ class GameIndexData
 
         $sort = $request->input('sort', '');
 
-        return new self($platform, $sort, $page_size);
+        return new self($platform, $sort, $page_size, $title_search);
     }
 
     /**
@@ -49,11 +56,13 @@ class GameIndexData
      * @param array $platform
      * @param string $sort
      * @param int $page_size
+     * @param string $title_search
      */
-    public function __construct(array $platform, string $sort, int $page_size)
+    public function __construct(array $platform, string $sort, int $page_size, string $title_search)
     {
         $this->platform = $platform;
         $this->sort = $sort;
         $this->page_size = $page_size;
+        $this->title_search = $title_search;
     }
 }
