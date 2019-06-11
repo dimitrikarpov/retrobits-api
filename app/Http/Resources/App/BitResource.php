@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\App;
 
+use App\Http\Resources\App\UserResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class BitResource extends JsonResource
@@ -25,6 +26,7 @@ class BitResource extends JsonResource
             'created_at' => (string) $this->created_at,
             'updated_at' => (string) $this->updated_at,
             'game' => new GameResource($this->game),
+            'user' => new UserResource($this->user),
         ];
     }
 }
