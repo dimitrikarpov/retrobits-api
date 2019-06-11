@@ -25,6 +25,7 @@ class BitResource extends JsonResource
             'created_at' => (string) $this->created_at,
             'updated_at' => (string) $this->updated_at,
             'game' => new GameResource($this->game),
+            'user' => new UserResource($this->user),
         ];
     }
 }

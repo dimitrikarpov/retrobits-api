@@ -15,7 +15,7 @@ class GameIndexData
      * Transform request with params to the data transfer object
      *
      * For example, transform this:
-     * /api/admin/games?filter[platform]=nes&sort=-title
+     * /api/admin/games?filter[platform]=nes&sort=-title&page_size=10&filter[title]=castlevania
      *
      * In to this:
      * GameIndexData {
