@@ -27,7 +27,8 @@ class GameIndexRequest extends FormRequest
     {
         return [
             'filter.platform' => ['sometimes', 'required', new ParamsInArray(Platform::pluck('slug')->toArray())],
-            'sort' => 'sometimes|required|in:title,-title'
+            'sort' => 'sometimes|required|in:title,-title',
+            'page_size' => 'sometimes|required|numeric|max:100',
         ];
     }
 }

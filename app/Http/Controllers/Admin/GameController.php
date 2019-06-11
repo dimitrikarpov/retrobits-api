@@ -22,7 +22,7 @@ class GameController extends Controller
     {
         $data = GameIndexData::fromRequest($request);
 
-        return GameResource::collection($action->handle($data)->paginate(10));
+        return GameResource::collection($action->handle($data)->paginate($data->page_size));
     }
 
     /**
