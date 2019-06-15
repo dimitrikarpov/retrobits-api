@@ -1,0 +1,191 @@
+swagger: "2.0"
+info:
+  description: "RetroBits API"
+  version: "1.0.0"
+  title: "RetroBits API"
+  contact:
+    email: "karpov.dimon@gmail.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "localhost:8000"
+basePath: "/api"
+schemes:
+  - http
+tags:
+  - name: "App"
+    description: "API for RetroBits App"
+  - name: "API"
+    description: "API for RetroBits Admin"
+paths:
+  /app/bits:
+    get:
+      tags:
+        - App
+      summary: "fetch bits"
+      description: "Get Bits with sorting, filtering, paging, etc.."
+      parameters:
+        - in: query
+          name: filter[difficult]
+          type: array
+          collectionFormat: csv
+          items:
+            type: string
+            enum: [easy,normal,hard]
+          description: "Filter Bits by difficult. Can accept these comma separated values: **easy**, **normal**, **hard**. Example: `filter[difficult]=easy,hard`"
+        - in: query
+          name: filter[players]
+          type: array
+          collectionFormat: csv
+          items:
+            type: string
+            enum: [1,2]
+          description: "Filter Bits players. Can accept these comma separated values: **1**, **2**. Example: `filter[players]=1,2`"
+        - in: query
+          name: filter[platform]
+          type: array
+          collectionFormat: csv
+          items:
+            type: string
+            enum: [zx,nes,snes,smd]
+          description: "Filter Bits by difficult. Can accept these comma separated values: **zx**, **nes**, **snes**, **smd**. Example: `filter[platform]=zx,nes`"
+        - in: query
+          name: filter[rating]
+          type: array
+          collectionFormat: csv
+          items:
+            type: string
+            enum: [1,2,3,4,5]
+          description: "Filter Bits by rating. Can accept these comma separated values: **1**, **2**, **3**, **4**, **5**. Example: `filter[rating]=4,5`"
+        - in: query
+          name: sort
+          type: string
+          enum: [rating, latest]
+          description: "Sort Bits by rating or publish date"
+      responses:
+        200:
+          description: OK
+        422:
+          description: "Something is wrong"
+
+    post:
+      tags:
+        - App
+      summary: create Bit
+      description: Create new Bit
+      consumes:
+        - multipart/form-data
+      parameters:
+        - in: formData
+          name: game
+          type: integer
+        - in: formData
+          name: title
+          type: string
+        - in: formData
+          name: description
+          type: string
+        - in: formData
+          name: players
+          type: integer
+        - in: formData
+          name: savefile
+          type: file
+
+      responses:
+        200:
+          description: OK
+        422:
+          description: The given data was invalid
+
+  '/app/bits/{bitId}':
+    get:
+      tags:
+        - App
+      summary: fetch bit by ID
+      description: Get Bit by ID
+      parameters:
+        - in: path
+          name: bitId
+          type: integer
+          required: true
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/AppBit'
+        404:
+          description: "Resource not found"
+
+definitions:
+  AppBit:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: Bit id
+      title:
+        type: string
+        description: Bit title
+      description:
+        type: string
+        description: Bit description
+      players:
+        type: integer
+        enum: [1,2]
+        description: current Bit amount of players
+      difficult:
+        type: string
+        enum: [easy,normal,hard]
+        description: Bit difficult
+      rating:
+        type: integer
+        enum: [1,2,3,4,5]
+        description: Bit rating
+      savefile:
+        type: string
+        description: path to savefile
+      created_at:
+        type: string
+        description: created timestamp
+      updated_at:
+        type: string
+        description: updated timestamp
+      game:
+        $ref: '#/definitions/AppGame'
+      user:
+        $ref: '#/definitions/AppUser'
+  AppGame:
+    type: object
+    properties:
+      id:
+        type: integer
+      title:
+        type: string
+      description:
+        type: string
+      rom:
+        type: string
+      image:
+        type: string
+      platform:
+        $ref: '#/definitions/AppPlatform'
+  AppPlatform:
+    type: object
+    properties:
+      id:
+        type: integer
+      title:
+        type: string
+      slug:
+        type: string
+  AppUser:
+    type: object
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+
+
+
