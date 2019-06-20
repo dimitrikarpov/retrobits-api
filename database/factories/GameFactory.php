@@ -5,7 +5,7 @@ use Faker\Generator as Faker;
 $factory->define(App\Game::class, function (Faker $faker) {
     return [
         'platform_id' => function () {
-            return App\Platform::all()->random()->id;
+            return App\Platform::inRandomOrder()->first()->id;
         },
         'title' => $faker->sentence(),
         'description' => $faker->paragraph(),
