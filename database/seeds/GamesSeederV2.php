@@ -31,10 +31,10 @@ class GamesSeederV2 extends Seeder
             ]);
 
             $images = [];
-            foreach ($gameInfo['images'] as $url) {
+            foreach ($gameInfo['images'] as $path) {
                 $image = factory(App\Image::class)->create([
                     'game_id' => $game->id,
-                    'url' => $url,
+                    'path' => $path,
                 ]);
                 $images[] = $image;
             }
