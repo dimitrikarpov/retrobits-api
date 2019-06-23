@@ -166,10 +166,15 @@ definitions:
         type: string
       rom:
         type: string
-      image:
-        type: string
+      images:
+        $ref: '#/definitions/AppImage'
       platform:
         $ref: '#/definitions/AppPlatform'
+  AppImage:
+    type: object
+    properties:
+      url:
+        type: string
   AppPlatform:
     type: object
     properties:
@@ -186,6 +191,3 @@ definitions:
         type: integer
       name:
         type: string
-
-
-
