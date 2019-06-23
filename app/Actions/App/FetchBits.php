@@ -17,6 +17,13 @@ class FetchBits
                 $platformQuery->whereIn('slug', $data->platform);
             });
         }
+        if ($data->platform) {
+            $query = $query->whereHas('game', function ($gameQuery) use ($data) {
+                $gameQuery->whereHas('platform', function ($platformQuery) use ($data) {
+                    $platformQuery->whereIn('slug', $data->platform);
+                });
+            });
+        }
 
         if ($data->difficult) {
             $query = $query->whereIn('difficult', $data->difficult);
@@ -32,9 +39,9 @@ class FetchBits
 
         if ($data->sort) {
             if ('latest' === $data->sort) {
-                $query = $query->orderBy('created_at', 'DESC');
+                $query->orderBy('created_at', 'DESC')->orderBy('title');
             } else if ('rating' === $data->sort) {
-                $query = $query->orderBy('rating', 'DESC');
+                $query->orderBy('rating', 'DESC')->orderBy('title');
             }
         }
 
