@@ -23,7 +23,6 @@ class CreateBitsTable extends Migration
             $table->string('difficult')->nullable();
             $table->integer('rating')->nullable();
             $table->string('savefile')->nullable();
-            $table->string('foo')->nullable();
             $table->timestamps();
 
             $table->foreign('game_id')
