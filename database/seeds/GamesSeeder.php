@@ -28,10 +28,11 @@ class GamesSeeder extends Seeder
         $platform = Platform::where('slug', $platformSlug)->first();
 
         foreach ($titles as $title) {
-            factory(App\Game::class)->create([
+            $game = factory(App\Game::class)->create([
                 'platform_id' => $platform->id,
                 'title' => $title,
             ]);
+            $game->images()->saveMany(factory(App\Image::class, mt_rand(1, 10))->create(['game_id' => $game->id]));
         }
     }
 }

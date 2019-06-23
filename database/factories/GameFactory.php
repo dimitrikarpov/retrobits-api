@@ -10,6 +10,5 @@ $factory->define(App\Game::class, function (Faker $faker) {
         'title' => $faker->sentence(),
         'description' => $faker->paragraph(),
         'rom' => null,
-        'image' => $faker->imageUrl(640, 480),
     ];
 });

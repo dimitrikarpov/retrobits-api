@@ -8,7 +8,7 @@ class Game extends Model
 {
     protected $guarded = [];
 
-    protected $with = ['platform'];
+    protected $with = ['platform', 'images'];
 
     public function platform()
     {
@@ -18,5 +18,10 @@ class Game extends Model
     public function bits()
     {
         return $this->hasMany(Bit::class);
+    }
+
+    public function images()
+    {
+        return $this->hasMany(Image::class);
     }
 }
