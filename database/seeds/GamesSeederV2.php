@@ -13,7 +13,7 @@ class GamesSeederV2 extends Seeder
      */
     public function run()
     {
-        $games = json_decode(Storage::disk('public')->get('export.json'), true);
+        $games = json_decode(Storage::disk('public')->get('games.json'), true);
         $this->seed('zx', $games);
         $this->seed('nes', $games);
         $this->seed('snes', $games);

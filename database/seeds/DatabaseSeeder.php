@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
             PlatformsSeeder::class,
         ]);
 
-        if (Storage::disk('public')->exists('export.json')) {
+        if (Storage::disk('public')->exists('games.json')) {
             // seed from json file
              $this->call(GamesSeederV2::class);
         } else {
