@@ -17,8 +17,6 @@ paths:
 
   /app/games:
     post:
-      tags:
-        - Admin
       summary: create Game
       description: Add new Game
       consumes:
@@ -45,7 +43,6 @@ paths:
           type: file
           description: game images
           required: true
-
       responses:
         200:
           description: OK
@@ -53,6 +50,34 @@ paths:
             $ref: '#/definitions/Game'
         422:
           description: The given data was invalid
+
+  /app/games/{gameId}:
+    get:
+      summary: show Game
+      description: Show Game by ID
+      parameters:
+        - in: path
+          name: gameId
+          type: integer
+          required: true
+      responses:
+        200:
+          description: OK
+        404:
+          description: Not found
+
+    delete:
+      summary: delete Game
+      description: Delete Game by ID
+      parameters:
+        - in: path
+          name: gameId
+          type: integer
+          required: true
+      responses:
+        204:
+          description: OK
+
 definitions:
 
   Game:

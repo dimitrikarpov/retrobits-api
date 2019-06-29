@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Game;
+use App\Image;
+use App\Observers\GameObserver;
+use App\Observers\ImageObserver;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +27,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Image::observe(ImageObserver::class);
+        Game::observe(GameObserver::class);
     }
 }
