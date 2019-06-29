@@ -24,11 +24,11 @@ class GameStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'platform' => 'required|exist:platform,id',
+            'platform' => 'required|exists:platforms,slug',
             'title' => 'required',
             'description' => 'required',
-            'rom' => 'required|file',
-            'image' => 'required|image',
+            'rom' => 'sometimes|file',
+            'images.*' => 'required|image',
         ];
     }
 }

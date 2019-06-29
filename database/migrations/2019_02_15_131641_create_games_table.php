@@ -19,7 +19,6 @@ class CreateGamesTable extends Migration
             $table->string('title');
             $table->text('description')->nullable();
             $table->string('rom')->nullable();
-            $table->string('image')->nullable();
             $table->timestamps();
 
             $table->foreign('platform_id')

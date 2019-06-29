@@ -1,0 +1,98 @@
+swagger: "2.0"
+info:
+  description: "RetroBits Admin API"
+  version: "1.0.0"
+  title: "RetroBits Admin API"
+  contact:
+    email: "karpov.dimon@gmail.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "localhost:8000"
+basePath: "/api"
+schemes:
+  - http
+
+paths:
+
+  /app/games:
+    post:
+      tags:
+        - Admin
+      summary: create Game
+      description: Add new Game
+      consumes:
+        - multipart/form-data
+      parameters:
+        - in: formData
+          name: platform
+          type: string
+          description: platform slug
+          required: true
+        - in: formData
+          name: title
+          type: string
+          required: true
+        - in: formData
+          name: description
+          type: string
+          required: true
+        - in: formData
+          name: rom
+          type: file
+        - in: formData
+          name: images[]
+          type: file
+          description: game images
+          required: true
+
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/Game'
+        422:
+          description: The given data was invalid
+definitions:
+
+  Game:
+    type: object
+    properties:
+      id:
+        type: integer
+      title:
+        type: string
+      description:
+        type: string
+      rom:
+        type: string
+      images:
+        type: array
+        items:
+          $ref: '#/definitions/Image'
+      platform:
+        $ref: '#/definitions/Platform'
+
+  Image:
+    type: object
+    properties:
+      url:
+        type: string
+
+  Platform:
+    type: object
+    properties:
+      id:
+        type: integer
+      title:
+        type: string
+      slug:
+        type: string
+
+  User:
+    type: object
+    properties:
+      id:
+        type: integer
+      name:
+        type: string

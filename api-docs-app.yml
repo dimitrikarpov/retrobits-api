@@ -1,27 +1,21 @@
 swagger: "2.0"
 info:
-  description: "RetroBits API"
+  description: "RetroBits App API"
   version: "1.0.0"
-  title: "RetroBits API"
+  title: "RetroBits App API"
   contact:
     email: "karpov.dimon@gmail.com"
   license:
     name: "Apache 2.0"
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
-host: "localhost:8000"
-basePath: "/api"
+host: "localhost:8080"
+basePath: "/api/app/"
 schemes:
   - http
-tags:
-  - name: "App"
-    description: "API for RetroBits App"
-  - name: "API"
-    description: "API for RetroBits Admin"
+
 paths:
-  /app/bits:
+  /bits:
     get:
-      tags:
-        - App
       summary: "fetch bits"
       description: "Get Bits with sorting, filtering, paging, etc.."
       parameters:
@@ -65,12 +59,12 @@ paths:
       responses:
         200:
           description: OK
+          schema:
+            $ref: '#/definitions/BitCollection'
         422:
           description: "Something is wrong"
 
     post:
-      tags:
-        - App
       summary: create Bit
       description: Create new Bit
       consumes:
@@ -98,10 +92,8 @@ paths:
         422:
           description: The given data was invalid
 
-  '/app/bits/{bitId}':
+  '/bits/{bitId}':
     get:
-      tags:
-        - App
       summary: fetch bit by ID
       description: Get Bit by ID
       parameters:
@@ -113,12 +105,12 @@ paths:
         200:
           description: OK
           schema:
-            $ref: '#/definitions/AppBit'
+            $ref: '#/definitions/Bit'
         404:
           description: "Resource not found"
 
 definitions:
-  AppBit:
+  Bit:
     type: object
     properties:
       id:
@@ -152,10 +144,14 @@ definitions:
         type: string
         description: updated timestamp
       game:
-        $ref: '#/definitions/AppGame'
+        $ref: '#/definitions/Game'
       user:
-        $ref: '#/definitions/AppUser'
-  AppGame:
+        $ref: '#/definitions/User'
+  BitCollection:
+    type: array
+    items:
+      $ref: '#/definitions/Bit'
+  Game:
     type: object
     properties:
       id:
@@ -167,15 +163,17 @@ definitions:
       rom:
         type: string
       images:
-        $ref: '#/definitions/AppImage'
+        type: array
+        items:
+          $ref: '#/definitions/Image'
       platform:
-        $ref: '#/definitions/AppPlatform'
-  AppImage:
+        $ref: '#/definitions/Platform'
+  Image:
     type: object
     properties:
       url:
         type: string
-  AppPlatform:
+  Platform:
     type: object
     properties:
       id:
@@ -184,7 +182,7 @@ definitions:
         type: string
       slug:
         type: string
-  AppUser:
+  User:
     type: object
     properties:
       id:
