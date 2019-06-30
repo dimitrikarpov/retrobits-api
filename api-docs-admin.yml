@@ -8,14 +8,43 @@ info:
   license:
     name: "Apache 2.0"
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
-host: "localhost:8000"
-basePath: "/api"
+host: "localhost:8080"
+basePath: "/api/admin"
 schemes:
   - http
 
 paths:
 
-  /app/games:
+  /games:
+    get:
+      summary: fetch games
+      description: Get Games with soring, filtering, paging, etc...
+      parameters:
+        - in: query
+          description: "Filter Games by platform. Can accept values **zx**, **nes**, **snes**, **smd**. Example: `filter[platform]=zx`"
+          name: filter[platform]
+          type: string
+          enum: [zx,nes,snes,smd]
+        - in: query
+          description: "Search Games by title. Example: `filter[title]=castlevania`"
+          name: filter[title]
+          type: string
+        - in: query
+          description: "Sort Games by something. Can accept **title** and **-title**. Example `sort=-title`"
+          name: sort
+          type: string
+        - in: query
+          description: "Set page size for paginator"
+          name: page_size
+          type: integer
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/GamesPaginated'
+        422:
+          description: The given data was invalid
+
     post:
       summary: create Game
       description: Add new Game
@@ -51,13 +80,13 @@ paths:
         422:
           description: The given data was invalid
 
-  /app/games/{gameId}:
+  /games/{id}:
     get:
       summary: show Game
       description: Show Game by ID
       parameters:
         - in: path
-          name: gameId
+          name: id
           type: integer
           required: true
       responses:
@@ -73,22 +102,19 @@ paths:
         - multipart/form-data
       parameters:
         - in: path
-          name: gameId
+          name: id
           type: integer
           required: true
         - in: formData
           name: platform
           type: string
           description: platform slug
-          required: true
         - in: formData
           name: title
           type: string
-          required: true
         - in: formData
           name: description
           type: string
-          required: true
         - in: formData
           name: rom
           type: file
@@ -96,7 +122,6 @@ paths:
           name: images[]
           type: file
           description: game images
-          required: true
       responses:
         200:
           description: OK
@@ -110,7 +135,7 @@ paths:
       description: Delete Game by ID
       parameters:
         - in: path
-          name: gameId
+          name: id
           type: integer
           required: true
       responses:
@@ -118,6 +143,42 @@ paths:
           description: OK
 
 definitions:
+
+  GamesPaginated:
+    type: object
+    properties:
+      data:
+        type: array
+        items:
+          $ref: '#/definitions/Game'
+      links:
+        type: object
+        properties:
+          first:
+            type: string
+          last:
+            type: string
+          prev:
+            type: string
+          next:
+            type: string
+      meta:
+        type: object
+        properties:
+          current_page:
+            type: integer
+          from:
+            type: integer
+          last_page:
+            type: integer
+          path:
+            type: string
+          per_page:
+            type: integer
+          to:
+            type: integer
+          total:
+            type: integer
 
   Game:
     type: object
