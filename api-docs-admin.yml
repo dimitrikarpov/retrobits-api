@@ -66,6 +66,45 @@ paths:
         404:
           description: Not found
 
+    put:
+      summary: update Game
+      description: Update Game data
+      consumes:
+        - multipart/form-data
+      parameters:
+        - in: path
+          name: gameId
+          type: integer
+          required: true
+        - in: formData
+          name: platform
+          type: string
+          description: platform slug
+          required: true
+        - in: formData
+          name: title
+          type: string
+          required: true
+        - in: formData
+          name: description
+          type: string
+          required: true
+        - in: formData
+          name: rom
+          type: file
+        - in: formData
+          name: images[]
+          type: file
+          description: game images
+          required: true
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/Game'
+        422:
+          description: The given data was invalid
+
     delete:
       summary: delete Game
       description: Delete Game by ID
@@ -101,6 +140,8 @@ definitions:
   Image:
     type: object
     properties:
+      id:
+        type: integer
       url:
         type: string
 

@@ -4,14 +4,16 @@ namespace App\Http\Controllers\Admin;
 
 use App\Actions\Admin\FetchGames;
 use App\Actions\Admin\StoreGame;
+use App\Actions\Admin\UpdateGame;
 use App\Game;
 use App\Http\Requests\Admin\GameIndexRequest;
 use App\Http\Requests\Admin\GameStoreRequest;
+use App\Http\Requests\Admin\GameUpdateRequest;
 use App\Http\Resources\Admin\GameResource;
 use App\Transfers\Admin\GameIndexData;
 use App\Http\Controllers\Controller;
 use App\Transfers\Admin\GameStoreData;
-use Illuminate\Http\Request;
+use App\Transfers\Admin\GameUpdateData;
 
 class GameController extends Controller
 {
@@ -56,11 +58,11 @@ class GameController extends Controller
      * @param  \App\Game  $game
      * @return GameResource
      */
-    public function update(Request $request, Game $game)
+    public function update(GameUpdateRequest $request, Game $game, UpdateGame $action)
     {
-        $game->update($request->only(['title', 'description', 'rom', 'image']));
+        $data = GameUpdateData::fromRequest($request);
 
-        return new GameResource($game);
+        return new GameResource($action->handle($data, $game));
     }
 
     /**
