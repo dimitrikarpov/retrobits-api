@@ -21,7 +21,7 @@ class GameUpdateData
             $request->input('title'),
             $request->input('description'),
             $request->rom,
-            $request->images
+            $request->images ?? []
         );
     }
 

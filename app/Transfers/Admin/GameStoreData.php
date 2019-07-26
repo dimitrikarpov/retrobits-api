@@ -21,11 +21,11 @@ class GameStoreData
             $request->input('title'),
             $request->input('description'),
             $request->rom,
-            $request->images
+            $request->images ?? []
         );
     }
 
-    public function __construct(Platform $platform, string $title, string $description, ?UploadedFile $rom, array $images)
+    public function __construct(Platform $platform, string $title, string $description, ?UploadedFile $rom, ?array $images)
     {
         $this->platform = $platform;
         $this->title = $title;

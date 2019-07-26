@@ -44,6 +44,6 @@ class UpdateGame
             Storage::disk('public')->delete($game->rom);
         }
 
-        return $data->rom->storeAs('roms', Str::uuid()->__toString(). '.' .$data->rom->getClientOriginalExtension(), ['disk' => 'public']);
+        return $data->rom->storeAs('roms', Str::uuid()->__toString() . '.' . $data->rom->getClientOriginalExtension(), ['disk' => 'public']);
     }
 }
